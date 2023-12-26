@@ -7,7 +7,13 @@ dotenv.config({
     path:'./env'
 })
 
-connectDB();
+connectDB().then(()=>{
+    app.listen(process.env.PORT || 7000 , ()=>{
+        console.log(`Server is running on port ${process.env.PORT}`);
+    });
+}).catch((err)=>{
+    console.log("Mongo error",err);
+})
 
 //import { DB_NAME } from "./constants";
 
